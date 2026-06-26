@@ -1,0 +1,74 @@
+// Monaco Club — schema do banco.
+// Local: SQLite. Para produção (Vercel), troque o provider para "postgresql"
+// e ajuste DATABASE_URL (ver README).
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id              String    @id @default(cuid())
+  nome            String
+  email           String    @unique
+  passwordHash    String
+  aceitouTermosEm DateTime?
+  createdAt       DateTime  @default(now())
+
+  addresses Address[]
+  orders    Order[]
+}
+
+model Address {
+  id          String   @id @default(cuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  nome        String
+  cep         String
+  logradouro  String
+  numero      String
+  complemento String?
+  bairro      String
+  cidade      String
+  estado      String
+  padrao      Boolean  @default(false)
+  createdAt   DateTime @default(now())
+}
+
+model Order {
+  id              String   @id @default(cuid())
+  userId          String
+  user            User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  // pendente -> pago -> enviado -> entregue / cancelado
+  status          String   @default("pendente")
+  subtotal        Float
+  descontoPercent Int      @default(0)
+  descontoValor   Float    @default(0)
+  freteNome       String?
+  freteValor      Float    @default(0)
+  total           Float
+  enderecoResumo  String?
+  // pagamento (abstração; gateway real depois)
+  paymentProvider String?
+  paymentStatus   String   @default("aguardando")
+  paymentRef      String?
+  createdAt       DateTime @default(now())
+
+  items OrderItem[]
+}
+
+model OrderItem {
+  id          String @id @default(cuid())
+  orderId     String
+  order       Order  @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  productSlug String
+  nome        String
+  preco       Float
+  tamanho     String
+  quantidade  Int
+  imagem      String
+}

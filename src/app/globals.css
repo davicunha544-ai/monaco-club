@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Títulos na fonte display (fina, no espírito da logo) */
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display), "Raleway", system-ui, sans-serif;
+    font-weight: 300;
+  }
+
+  ::selection {
+    background-color: #7a1320; /* bordô — único acento */
+    color: #f5f3ef;
+  }
+}
