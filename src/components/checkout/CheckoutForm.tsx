@@ -16,6 +16,7 @@ import {
 
 const ENDERECO_VAZIO: EnderecoEntrega = {
   nome: "",
+  cpf: "",
   cep: "",
   logradouro: "",
   numero: "",
@@ -103,6 +104,15 @@ export function CheckoutForm() {
             className="sm:col-span-2"
             value={endereco.nome}
             onChange={(e) => set("nome", e.target.value)}
+            required
+          />
+          <Field
+            label="CPF"
+            name="cpf"
+            inputMode="numeric"
+            placeholder="000.000.000-00"
+            value={endereco.cpf}
+            onChange={(e) => set("cpf", e.target.value)}
             required
           />
           <Field

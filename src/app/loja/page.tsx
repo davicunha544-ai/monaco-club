@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Container } from "@/components/Container";
 import { ShopTabs } from "@/components/ShopTabs";
-import { products, type ProductGenero } from "@/data/products";
+import { getProdutos, type ProductGenero } from "@/lib/products";
 
 export const metadata: Metadata = {
   title: "Loja",
@@ -19,6 +19,8 @@ export default async function LojaPage({
   const initialGenero: ProductGenero | "todos" =
     genero === "masculino" || genero === "feminino" ? genero : "todos";
   const initialCategoria = categoria ?? "todas";
+
+  const products = await getProdutos();
 
   return (
     <>

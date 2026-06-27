@@ -4,6 +4,7 @@ import { AuthError } from "next-auth";
 import bcrypt from "bcryptjs";
 import { signIn, signOut } from "@/auth";
 import { prisma } from "@/lib/db";
+import { enviarEmail, emailBoasVindas } from "@/lib/email";
 
 export type FormState = { error?: string } | undefined;
 
@@ -34,6 +35,14 @@ export async function cadastrar(
   await prisma.user.create({
     data: { nome, email, passwordHash, aceitouTermosEm: new Date() },
   });
+
+  // E-mail de boas-vindas (não falha o cadastro se der erro).
+  try {
+    const { subject, html } = emailBoasVindas(nome);
+    await enviarEmail({ to: email, subject, html });
+  } catch (e) {
+    console.error("Falha no e-mail de boas-vindas:", e);
+  }
 
   try {
     await signIn("credentials", { email, senha, redirectTo: "/conta" });

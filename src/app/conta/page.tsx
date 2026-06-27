@@ -105,6 +105,9 @@ export default async function ContaPage() {
                       {a.complemento ? ` (${a.complemento})` : ""} — {a.bairro},{" "}
                       {a.cidade}/{a.estado} — CEP {a.cep}
                     </p>
+                    {a.cpf ? (
+                      <p className="mt-0.5 text-xs text-ink/45">CPF {a.cpf}</p>
+                    ) : null}
                   </div>
                   <form action={removerEndereco}>
                     <input type="hidden" name="id" value={a.id} />

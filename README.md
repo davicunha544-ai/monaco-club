@@ -14,6 +14,7 @@ Marca de moda clássica fina — _para ela e para ele_. Luxo discreto.
 npm install            # dependências
 cp .env.example .env   # variáveis de ambiente (ajuste se quiser)
 npx prisma db push     # cria o banco local (SQLite) e o Prisma Client
+npm run db:seed        # popula os produtos + cria o admin (admin@monacoclub.com / monacoadmin)
 npm run dev
 ```
 
@@ -45,6 +46,17 @@ Variáveis de ambiente (`.env`): `DATABASE_URL` e `AUTH_SECRET` (gere com `opens
 2. Crie um Postgres (Neon / Vercel / Supabase) e use a connection string em `DATABASE_URL`.
 3. Defina `DATABASE_URL` e `AUTH_SECRET` nas variáveis de ambiente da Vercel.
 4. Aplique o schema no deploy: `prisma migrate deploy` (ou `prisma db push`).
+
+## Painel admin
+
+Os produtos ficam no **banco** (modelo `Product`). Gerencie em **`/admin`** — protegido (só usuários com `role: "admin"`).
+
+- **Login admin (seed):** `admin@monacoclub.com` / `monacoadmin` — troque a senha e/ou promova sua própria conta a admin em produção.
+- **`/admin/produtos`**: listar, adicionar, editar e excluir peças — com **upload de imagem**, **cores** e **preço atual + preço antigo** (riscado na loja quando houver promoção).
+- Popular produtos + admin: `npm run db:seed`.
+- **Upload**: imagens vão para `public/uploads/` (local). Em produção (Vercel, fs read-only) → trocar `src/lib/upload.ts` por Vercel Blob.
+
+> Em breve no admin: **Vendas** (tickets de despacho) e **Dashboard** (faturamento).
 
 ## Estrutura
 

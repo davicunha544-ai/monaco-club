@@ -8,13 +8,13 @@ import { cn } from "@/lib/cn";
 import {
   GENERO_LABEL,
   getCategorias,
-  getProdutosPorGenero,
-  products,
+  getProdutos,
   type ProductGenero,
-} from "@/data/products";
+} from "@/lib/products";
 
-export default function HomePage() {
-  const destaques = products.slice(0, 4);
+export default async function HomePage() {
+  const todos = await getProdutos();
+  const destaques = todos.slice(0, 4);
   const generos: ProductGenero[] = ["feminino", "masculino"];
 
   return (
@@ -44,7 +44,9 @@ export default function HomePage() {
 
           <div className="grid gap-5 sm:grid-cols-2">
             {generos.map((genero, index) => {
-              const categorias = getCategorias(getProdutosPorGenero(genero));
+              const categorias = getCategorias(
+                todos.filter((p) => p.genero === genero),
+              );
               const dark = genero === "masculino";
               return (
                 <Link

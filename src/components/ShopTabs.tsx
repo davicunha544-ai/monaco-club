@@ -5,7 +5,7 @@ import {
   GENERO_LABEL,
   type Product,
   type ProductGenero,
-} from "@/data/products";
+} from "@/lib/products";
 import { cn } from "@/lib/cn";
 import { ProductGrid } from "./ProductGrid";
 
