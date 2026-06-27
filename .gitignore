@@ -36,3 +36,12 @@ yarn-error.log*
 /prisma/dev.db
 /prisma/dev.db-journal
 /prisma/*.db
+
+# uploads de imagens (admin) — locais
+/public/uploads/*
+!/public/uploads/.gitkeep
+
+# imagens de trabalho soltas na raiz (originais; as versões usadas ficam em /public)
+/*.png
+/*.jpg
+/*.jpeg

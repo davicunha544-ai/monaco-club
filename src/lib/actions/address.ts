@@ -4,6 +4,7 @@ import { revalidatePath } from "next/cache";
 import { auth } from "@/auth";
 import { prisma } from "@/lib/db";
 import type { FormState } from "./auth";
+import { validarCPF, formatarCPF } from "@/lib/cpf";
 
 /** Adiciona um endereço à conta do cliente. */
 export async function adicionarEndereco(
@@ -37,8 +38,11 @@ export async function adicionarEndereco(
   if (obrigatorios.some((c) => c === ""))
     return { error: "Preencha todos os campos obrigatórios." };
 
+  const cpf = String(formData.get("cpf") ?? "").trim();
+  if (!validarCPF(cpf)) return { error: "CPF inválido." };
+
   await prisma.address.create({
-    data: { userId: session.user.id, ...dados },
+    data: { userId: session.user.id, cpf: formatarCPF(cpf), ...dados },
   });
 
   revalidatePath("/conta");

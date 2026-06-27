@@ -14,6 +14,7 @@ export function EnderecoForm() {
   return (
     <form action={action} className="grid gap-4 sm:grid-cols-2">
       <Field label="Identificação (ex.: Casa)" name="nome" required className="sm:col-span-2" />
+      <Field label="CPF" name="cpf" inputMode="numeric" placeholder="000.000.000-00" required />
       <Field label="CEP" name="cep" inputMode="numeric" required />
       <Field label="Estado (UF)" name="estado" required />
       <Field label="Logradouro" name="logradouro" required className="sm:col-span-2" />

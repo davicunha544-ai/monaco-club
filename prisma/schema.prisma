@@ -16,6 +16,7 @@ model User {
   nome            String
   email           String    @unique
   passwordHash    String
+  role            String    @default("cliente")
   aceitouTermosEm DateTime?
   createdAt       DateTime  @default(now())
 
@@ -28,6 +29,7 @@ model Address {
   userId      String
   user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   nome        String
+  cpf         String?
   cep         String
   logradouro  String
   numero      String
@@ -52,6 +54,7 @@ model Order {
   freteValor      Float    @default(0)
   total           Float
   enderecoResumo  String?
+  cpf             String?
   // pagamento (abstração; gateway real depois)
   paymentProvider String?
   paymentStatus   String   @default("aguardando")
@@ -71,4 +74,20 @@ model OrderItem {
   tamanho     String
   quantidade  Int
   imagem      String
+}
+
+model Product {
+  id          String   @id @default(cuid())
+  slug        String   @unique
+  nome        String
+  descricao   String   @default("")
+  preco       Float
+  precoAntigo Float?
+  imagem      String
+  cores       String? // CSV: "Preto,Branco"
+  tamanhos    String   @default("") // CSV: "P,M,G,GG"
+  genero      String // "masculino" | "feminino"
+  categoria   String
+  ativo       Boolean  @default(true)
+  createdAt   DateTime @default(now())
 }

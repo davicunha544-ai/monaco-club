@@ -1,16 +1,18 @@
 import Link from "next/link";
-import type { Product } from "@/data/products";
+import type { Product } from "@/lib/products";
 import { formatBRL } from "@/lib/format";
 
 export function ProductCard({ product }: { product: Product }) {
+  const promo =
+    product.precoAntigo != null && product.precoAntigo > product.preco;
+
   return (
     <article className="group flex flex-col text-center">
       <Link href={`/produto/${product.slug}`} className="flex flex-1 flex-col">
         <div className="relative aspect-[3/4] overflow-hidden bg-mist">
-          {/* Placeholders são SVG; ao usar fotos reais, troque por next/image. */}
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src={product.imagens[0]}
+            src={product.imagem}
             alt={product.nome}
             loading="lazy"
             className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
@@ -24,7 +26,16 @@ export function ProductCard({ product }: { product: Product }) {
           <h3 className="mt-1 font-display text-lg font-light leading-snug text-ink transition-colors group-hover:text-bordo">
             {product.nome}
           </h3>
-          <p className="mt-1.5 text-sm text-ink/80">{formatBRL(product.preco)}</p>
+          <p className="mt-1.5 text-sm">
+            {promo ? (
+              <span className="mr-2 text-ink/40 line-through">
+                {formatBRL(product.precoAntigo!)}
+              </span>
+            ) : null}
+            <span className={promo ? "text-bordo" : "text-ink/80"}>
+              {formatBRL(product.preco)}
+            </span>
+          </p>
         </div>
       </Link>
     </article>
