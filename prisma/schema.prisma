@@ -1,13 +1,13 @@
 // Monaco Club — schema do banco.
-// Local: SQLite. Para produção (Vercel), troque o provider para "postgresql"
-// e ajuste DATABASE_URL (ver README).
+// Postgres (Neon) em produção e em dev. Configure DATABASE_URL no .env
+// com a connection string do Neon (ver README / .env.example).
 
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 

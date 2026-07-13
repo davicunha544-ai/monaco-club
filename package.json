@@ -5,16 +5,18 @@
   "description": "Monaco Club — e-commerce de moda de luxo discreto (Next.js + TypeScript + Tailwind).",
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "prisma generate && next build",
     "start": "next start",
     "lint": "next lint",
     "postinstall": "prisma generate",
     "db:push": "prisma db push",
     "db:seed": "node prisma/seed.js",
+    "db:setup": "prisma db push && node prisma/seed.js",
     "db:studio": "prisma studio"
   },
   "dependencies": {
     "@prisma/client": "^6.19.3",
+    "@vercel/blob": "^2.6.1",
     "bcryptjs": "^3.0.3",
     "next": "^15.1.0",
     "next-auth": "^5.0.0-beta.31",

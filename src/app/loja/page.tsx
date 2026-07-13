@@ -9,6 +9,9 @@ export const metadata: Metadata = {
     "A coleção Monaco Club. Filtre por gênero (Masculino / Feminino) e categoria.",
 };
 
+// Lê o catálogo do banco por requisição (evita acesso ao DB no build).
+export const dynamic = "force-dynamic";
+
 export default async function LojaPage({
   searchParams,
 }: {
