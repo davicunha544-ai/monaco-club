@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Raleway, Inter } from "next/font/google";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { IntroSignature } from "@/components/IntroSignature";
 import { CartProvider } from "@/components/cart/CartProvider";
 import "./globals.css";
 
@@ -50,6 +51,7 @@ export default function RootLayout({
   return (
     <html lang="pt-BR" className={`${display.variable} ${sans.variable}`}>
       <body className="flex min-h-screen flex-col bg-bone font-sans text-ink antialiased">
+        <IntroSignature />
         <CartProvider>
           <Header />
           <main className="flex-1">{children}</main>
