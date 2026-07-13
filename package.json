@@ -5,7 +5,7 @@
   "description": "Monaco Club — e-commerce de moda de luxo discreto (Next.js + TypeScript + Tailwind).",
   "scripts": {
     "dev": "next dev",
-    "build": "prisma generate && DATABASE_URL=$DATABASE_URL_UNPOOLED prisma db push --skip-generate --accept-data-loss && DATABASE_URL=$DATABASE_URL_UNPOOLED node prisma/seed.js && next build",
+    "build": "prisma generate && next build",
     "start": "next start",
     "lint": "next lint",
     "postinstall": "prisma generate",
