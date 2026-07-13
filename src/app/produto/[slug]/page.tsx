@@ -6,6 +6,9 @@ import { AddToCart } from "@/components/cart/AddToCart";
 import { formatBRL } from "@/lib/format";
 import { getProdutoPorSlug, parseLista } from "@/lib/products";
 
+// Lê o produto do banco por requisição (evita acesso ao DB no build).
+export const dynamic = "force-dynamic";
+
 export async function generateMetadata({
   params,
 }: {

@@ -12,6 +12,9 @@ import {
   type ProductGenero,
 } from "@/lib/products";
 
+// Lê o catálogo do banco por requisição (evita acesso ao DB no build).
+export const dynamic = "force-dynamic";
+
 export default async function HomePage() {
   const todos = await getProdutos();
   const destaques = todos.slice(0, 4);
@@ -24,8 +27,8 @@ export default async function HomePage() {
       {/* Editorial — riva */}
       <EditorialBand
         imagem="/editorial/riva.jpg"
-        titulo="Old money, atemporal."
-        texto="A elegância silenciosa que atravessa as estações."
+        titulo="A elegância da discrição."
+        texto="Peças que falam baixo e atravessam as estações."
         href="/loja"
         cta="Ver a coleção"
       />
