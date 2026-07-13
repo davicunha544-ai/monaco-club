@@ -25,8 +25,8 @@ export function IntroSignature() {
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     setShow(true);
 
-    const tLeave = window.setTimeout(() => setLeaving(true), reduce ? 250 : 2500);
-    const tEnd = window.setTimeout(() => setShow(false), reduce ? 700 : 3300);
+    const tLeave = window.setTimeout(() => setLeaving(true), reduce ? 250 : 3800);
+    const tEnd = window.setTimeout(() => setShow(false), reduce ? 700 : 4700);
     return () => {
       window.clearTimeout(tLeave);
       window.clearTimeout(tEnd);
@@ -65,7 +65,7 @@ export function IntroSignature() {
           width: min(74vw, 340px);
           aspect-ratio: 3 / 1;
           clip-path: inset(0 100% 0 0);
-          animation: intro-write 2s cubic-bezier(0.62, 0.04, 0.3, 1) 0.35s forwards;
+          animation: intro-write 3.2s cubic-bezier(0.62, 0.04, 0.3, 1) 0.35s forwards;
         }
         .intro__logo {
           width: 100%;
@@ -88,7 +88,7 @@ export function IntroSignature() {
           );
           opacity: 0;
           filter: blur(0.4px);
-          animation: intro-nib 2s cubic-bezier(0.62, 0.04, 0.3, 1) 0.35s forwards;
+          animation: intro-nib 3.2s cubic-bezier(0.62, 0.04, 0.3, 1) 0.35s forwards;
         }
         @keyframes intro-write {
           from {
